@@ -1,0 +1,7 @@
+api:
+    type: rest
+    resource: "routing_rest.yml"
+
+api_login_check:
+   path: /login_check
+

@@ -1,0 +1,4 @@
+user:
+    type:     rest
+    resource: LKE\UserBundle\Controller\UserController
+
