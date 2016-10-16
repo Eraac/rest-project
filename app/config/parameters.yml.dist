@@ -17,13 +17,3 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
-
-    jwt_private_key_path: %kernel.root_dir%/var/jwt/private.pem   # ssh private key path
-    jwt_public_key_path:  %kernel.root_dir%/var/jwt/public.pem    # ssh public key path
-    jwt_key_pass_phrase:  ''                                      # ssh key pass phrase
-    jwt_token_ttl:        86400
-
-	# CORS
-	allow_origin:   *
-	allow_methods:  "GET, POST, PATCH, DELETE, OPTIONS"
-	allow_headers:  "Authorization, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, ContentType"

@@ -1,5 +1,0 @@
-api_lke_user:
-    type:     rest
-    resource: "@LKEUserBundle/Resources/config/routing.yml"
-    name_prefix: api_
-

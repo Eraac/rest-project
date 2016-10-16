@@ -1,13 +1,4 @@
-# rest-project
-Symfony de base regroupant le nécessaire pour faire un back-end RESTful
+project
+=======
 
-# Bundles
-
-- FOSUserBundle
-- FOSRestBundle
-- NelmioApiDocBundle
-- LexikJWTAuthenticationBundle
-- JMSSerializerBundle
-
-# Documentation
-Les étapes réalisées pour en arriver là : [doc](https://docs.google.com/document/d/15Rbze4TUVsHe7HfitBlEhHMnYamlRa7YpUlXnINx-M0/edit?usp=sharing)
+A Symfony project created on October 16, 2016, 11:41 am.

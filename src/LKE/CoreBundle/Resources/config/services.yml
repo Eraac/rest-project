@@ -1,4 +1,0 @@
-services:
-#    lke_core.example:
-#        class: LKE\CoreBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
