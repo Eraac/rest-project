@@ -91,3 +91,6 @@ fos_rest:
                 enabled: true
                 header_name: "X-Accept-Version"
             media_type: false
+
+# http://symfony.com/doc/current/bundles/NelmioApiDocBundle/configuration-reference.html
+nelmio_api_doc: ~

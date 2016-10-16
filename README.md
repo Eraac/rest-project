@@ -9,7 +9,7 @@ Bundles
 * FOSRestBundle
 * FOSOAuthBundle
 * JMSSerializerBundle
-* NelmioApiBundle
+* NelmioApiDocBundle
 * NelmioCorsBundle
 * BazingaHateoasBundle
 * StofDoctrineExtensionsBundle
