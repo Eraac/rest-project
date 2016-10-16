@@ -1,4 +1,15 @@
-project
+rest-project
 =======
 
-A Symfony project created on October 16, 2016, 11:41 am.
+Un symfony de base regroupant le nécessaire pour faire une API restful
+
+Bundles
+=======
+* FOSUserBundle
+* FOSRestBundle
+* FOSOAuthBundle
+* JMSSerializerBundle
+* NelmioApiBundle
+* NelmioCorsBundle
+* BazingaHateoasBundle
+* StofDoctrineExtensionsBundle
