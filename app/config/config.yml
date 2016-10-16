@@ -77,11 +77,17 @@ fos_user:
     user_class: UserBundle\Entity\User
 
 fos_rest:
+    view:
+        formats:
+            json: true
+    routing_loader:
+        default_format: json
+        include_format: false
     versioning:
-        enable: true
+        enabled: true
         resolvers:
             query: false
             custom_header:
                 enabled: true
-                header_name: X-Accept-Version
+                header_name: "X-Accept-Version"
             media_type: false
