@@ -1,4 +1,14 @@
 services:
-#    user.example:
-#        class: UserBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    user.command.create_client:
+        class: UserBundle\Command\CreateClientCommand
+        tags:
+            - { name: console.command }
+        arguments: ['@fos_oauth_server.client_manager.default']
+
+    user.mailer:
+        class: UserBundle\Mailer\Mailer
+        public: false
+        arguments:
+            - '@mailer'
+            - '@twig'
+            - { base_url_confirmation: '%base_url_confirmation%' }

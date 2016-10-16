@@ -1,0 +1,21 @@
+registration:
+    email:
+        subject: 'Welcome %username%!'
+        message: |
+            Hello %username%!
+
+            To finish activating your account - please visit %confirmation_url%
+
+            Regards,
+            the Team.
+
+resetting:
+    email:
+        subject: 'Reset Password'
+        message: |
+            Hello %username%!
+
+            To reset your password - please use this code: %token%
+
+            Regards,
+            the Team.

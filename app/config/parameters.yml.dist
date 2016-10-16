@@ -14,9 +14,13 @@ parameters:
     mailer_password:   ~
     mailer_port: 25
     mailer_encryption: ~
+    mailer_sender:     no-reply@domain.tld
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
 
     # cors
     cors_allow_origin: http://localhost
+
+    app_name: rest-project
+    base_url_confirmation: http://localhost?token=

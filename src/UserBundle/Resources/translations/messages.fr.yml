@@ -1,0 +1,21 @@
+registration:
+    email:
+        subject: 'Bienvenue %username% !'
+        message: |
+            Bonjour %username% !
+
+            Pour valider votre compte utilisateur, merci de vous rendre sur %confirmation_url%
+
+            Cordialement,
+            L'équipe
+
+resetting:
+    email:
+        subject: 'Réinitialisation de votre mot de passe'
+        message: |
+            Bonjour %username% !
+
+            Voici votre code pour réinitialiser votre mot de passe : %token%
+
+            Cordialement,
+            L'équipe
