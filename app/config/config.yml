@@ -97,3 +97,8 @@ nelmio_cors:
         max_age:        3600
     paths:
         '^/': ~
+
+stof_doctrine_extensions:
+    orm:
+        default:
+            timestampable: true
