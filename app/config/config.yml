@@ -75,3 +75,13 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: UserBundle\Entity\User
+
+fos_rest:
+    versioning:
+        enable: true
+        resolvers:
+            query: false
+            custom_header:
+                enabled: true
+                header_name: X-Accept-Version
+            media_type: false
