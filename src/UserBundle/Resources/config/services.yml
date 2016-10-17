@@ -1,9 +1,9 @@
 services:
-    user.command.create_client:
-        class: UserBundle\Command\CreateClientCommand
-        tags:
-            - { name: console.command }
-        arguments: ['@fos_oauth_server.client_manager.default']
+#    user.command.create_client:
+#        class: UserBundle\Command\CreateClientCommand
+#        tags:
+#            - { name: console.command }
+#        arguments: ['@fos_oauth_server.client_manager.default']
 
     user.mailer:
         class: UserBundle\Mailer\Mailer
@@ -12,3 +12,11 @@ services:
             - '@mailer'
             - '@twig'
             - { base_url_confirmation: '%base_url_confirmation%' }
+
+    user.user_listener:
+        class: UserBundle\Listener\UserListener
+        arguments:
+            - '@user.mailer'
+            - '@fos_user.util.token_generator'
+        tags:
+            - { name: doctrine.orm.entity_listener, entity: UserBundle\Entity\User, event: prePersist, method: prePersistHandler }

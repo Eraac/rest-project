@@ -1,0 +1,19 @@
+UserBundle\Entity\User:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: email
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: username
+
+    properties:
+        username:
+            - NotBlank:
+            - Length:
+                max: 255
+        email:
+            - NotBlank:
+            - Length:
+                max: 255
+            - Email:
+        plainPassword:
+            - NotBlank:
+            - Length:
+                max: 255

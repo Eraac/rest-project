@@ -79,6 +79,7 @@ fos_rest:
     view:
         formats:
             json: true
+        view_response_listener: true
     routing_loader:
         default_format: json
         include_format: false

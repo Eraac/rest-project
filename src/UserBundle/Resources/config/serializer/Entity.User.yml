@@ -1,0 +1,13 @@
+UserBundle\Entity\User:
+    exclusion_policy: ALL
+
+    properties:
+        id:
+            expose: true
+            read_only: true
+        email:
+            expose: true
+        username:
+            expose: true
+        confirmed:
+            expose: true
