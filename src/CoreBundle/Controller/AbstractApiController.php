@@ -6,8 +6,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use Symfony\Component\Form\Form;
+use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
 class AbstractApiController extends FOSRestController implements ClassResourceInterface
@@ -67,6 +67,34 @@ class AbstractApiController extends FOSRestController implements ClassResourceIn
 
         $em->persist($entity);
         $em->flush();
+    }
+
+    /**
+     * Dispatch an event
+     *
+     * @param string $name
+     * @param Event $event
+     */
+    protected function dispatch($name, Event $event)
+    {
+        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+        $dispatcher = $this->get('event_dispatcher');
+
+        $dispatcher->dispatch($name, $event);
+    }
+
+    /**
+     * Translate a message
+     *
+     * @param string $message
+     * @param array $parameters
+     * @param string $domain
+     *
+     * @return string
+     */
+    protected function t($message, array $parameters = [], $domain = 'messages') : string
+    {
+        return $this->get('translator')->trans($message, $parameters, $domain);
     }
 
     /**

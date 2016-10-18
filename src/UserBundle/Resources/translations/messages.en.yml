@@ -1,6 +1,6 @@
 registration:
     email:
-        subject: 'Welcome %username%!'
+        subject: "Welcome %username%!"
         message: |
             Hello %username%!
 
@@ -11,7 +11,7 @@ registration:
 
 resetting:
     email:
-        subject: 'Reset Password'
+        subject: "Reset Password"
         message: |
             Hello %username%!
 
@@ -19,3 +19,14 @@ resetting:
 
             Regards,
             the Team.
+    password_request_expired: "Your request has been expired"
+
+confirmation:
+    user:
+        not_found: "The user with confirmation token %token% does not exist"
+
+user:
+    error:
+        forget_password:
+            empty_username: 'Username can not be empty'
+            not_found: "Username does not exist"

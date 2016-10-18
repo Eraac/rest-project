@@ -1,6 +1,6 @@
 registration:
     email:
-        subject: 'Bienvenue %username% !'
+        subject: "Bienvenue %username% !"
         message: |
             Bonjour %username% !
 
@@ -11,7 +11,7 @@ registration:
 
 resetting:
     email:
-        subject: 'Réinitialisation de votre mot de passe'
+        subject: "Réinitialisation de votre mot de passe"
         message: |
             Bonjour %username% !
 
@@ -19,3 +19,14 @@ resetting:
 
             Cordialement,
             L'équipe
+    password_request_expired: "Votre requête a expirée"
+
+confirmation:
+    user:
+        not_found: "L'utilisateur avec le token de confirmation '%token%' n'existe pas"
+
+user:
+    error:
+        forget_password:
+            empty_username: "Le nom d'utilisateur ne peut pas être vide"
+            not_found: "Le nom d'utilisateur n'existe pas"

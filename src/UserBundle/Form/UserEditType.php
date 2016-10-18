@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use UserBundle\Entity\User;
 
-class UserType extends AbstractApiType
+class UserEditType extends AbstractApiType
 {
     /**
      * {@inheritdoc}
@@ -18,9 +18,8 @@ class UserType extends AbstractApiType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username',   TextType::class)
-            ->add('email',      EmailType::class)
-            ->add('password',   PasswordType::class, ['property_path' => 'plainPassword'])
+            ->remove('username')
+            ->remove('email')
         ;
     }
 
