@@ -14,7 +14,7 @@ services:
             - { base_url_confirmation: '%base_url_confirmation%' }
 
     user.user_listener:
-        class: UserBundle\Listener\UserListener
+        class: UserBundle\EventListener\UserListener
         arguments:
             - '@user.mailer'
             - '@fos_user.util.token_generator'

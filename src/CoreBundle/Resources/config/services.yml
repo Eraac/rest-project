@@ -1,4 +1,7 @@
 services:
-#    core.example:
-#        class: CoreBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    core.event.listener.extended_view_response:
+        class: CoreBundle\EventListener\ExtendedViewResponseListener
+        arguments:
+            - "@security.authorization_checker"
+        tags:
+            - { name: kernel.event_listener, event: kernel.view, method: onKernelView, priority: 101 }

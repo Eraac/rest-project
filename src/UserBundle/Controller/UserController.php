@@ -18,7 +18,7 @@ class UserController extends AbstractUserController
      *
      * @return object|\Symfony\Component\HttpFoundation\JsonResponse
      *
-     * @FOSRest\View(statusCode=JsonResponse::HTTP_CREATED)
+     * @FOSRest\View(serializerGroups={"me"}, statusCode=JsonResponse::HTTP_CREATED)
      */
     public function postAction(Request $request)
     {
@@ -120,6 +120,11 @@ class UserController extends AbstractUserController
             $this->updateUser($user);
         }
 
-        return new JsonResponse($this->getErrorMessages($form), JsonResponse::HTTP_BAD_REQUEST);
+        // avoid return 204 when json is empty
+        if (empty(json_decode($request->getContent(), true))) {
+            return new JsonResponse(['errors' => [$this->t('core.error.empty_json')]], JsonResponse::HTTP_BAD_REQUEST);
+        }
+
+        return $form;
     }
 }

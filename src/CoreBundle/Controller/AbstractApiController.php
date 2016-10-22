@@ -102,31 +102,4 @@ class AbstractApiController extends FOSRestController implements ClassResourceIn
     {
         return $this->get('translator')->trans($message, $parameters, $domain);
     }
-
-    /**
-     * Get all errors of a form
-     *
-     * @param Form $form
-     *
-     * @return array
-     *
-     * TODO use custom handler
-     */
-    protected function getErrorMessages(Form $form) : array
-    {
-        $errors = [];
-
-        foreach ($form->getErrors() as $key => $error) {
-            $errors[] = $error->getMessage();
-        }
-
-        /** @var Form $child */
-        foreach ($form->all() as $child) {
-            if (!$child->isValid()) {
-                $errors[$child->getName()] = $this->getErrorMessages($child);
-            }
-        }
-
-        return $errors;
-    }
 }

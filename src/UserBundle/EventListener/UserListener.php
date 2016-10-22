@@ -1,6 +1,6 @@
 <?php
 
-namespace UserBundle\Listener;
+namespace UserBundle\EventListener;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use FOS\UserBundle\Mailer\MailerInterface;

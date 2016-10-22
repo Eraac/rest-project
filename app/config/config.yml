@@ -92,6 +92,14 @@ fos_rest:
                 header_name: "X-Accept-Version"
             media_type: false
 
+jms_serializer:
+    metadata:
+        auto_detection: true
+        directories:
+            FOSUserBundle:
+                namespace_prefix: "FOS\\UserBundle"
+                path: "%kernel.root_dir%/config/serializer/fos"
+
 fos_oauth_server:
     db_driver: orm
     client_class:        UserBundle\Entity\Client
