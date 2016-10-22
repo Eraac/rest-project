@@ -110,7 +110,7 @@ class UserController extends AbstractUserController
             return new JsonResponse(['error' => $this->t('resetting.password_request_expired')], JsonResponse::HTTP_GONE);
         }
 
-        $form = $this->createForm(UserEditType::class, $user, ['method' => 'post']);
+        $form = $this->createForm(UserEditType::class, $user, ['method' => Request::METHOD_POST]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -7,6 +7,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\EventDispatcher\Event;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -28,7 +29,7 @@ class AbstractApiController extends FOSRestController implements ClassResourceIn
      * @param object $entity
      * @param string $method
      *
-     * @return object|JsonResponse
+     * @return object|JsonResponse|Form
      */
     protected function form(Request $request, $formType, $entity, $method)
     {
@@ -39,7 +40,12 @@ class AbstractApiController extends FOSRestController implements ClassResourceIn
             return $this->formSuccess($entity);
         }
 
-        return new JsonResponse($this->getErrorMessages($form), JsonResponse::HTTP_BAD_REQUEST);
+        // avoid return 201 when json is empty
+        if (empty(json_decode($request->getContent(), true))) {
+            return new JsonResponse(['errors' => [$this->t('core.error.empty_json')]], JsonResponse::HTTP_BAD_REQUEST);
+        }
+
+        return $form;
     }
 
     /**

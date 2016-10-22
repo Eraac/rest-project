@@ -1,0 +1,3 @@
+core:
+    error:
+        empty_json: "JSON can't be empty"

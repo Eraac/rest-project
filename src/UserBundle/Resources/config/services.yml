@@ -1,9 +1,9 @@
 services:
-#    user.command.create_client:
-#        class: UserBundle\Command\CreateClientCommand
-#        tags:
-#            - { name: console.command }
-#        arguments: ['@fos_oauth_server.client_manager.default']
+    user.command.create_client:
+        class: UserBundle\Command\CreateClientCommand
+        tags:
+            - { name: console.command }
+        arguments: ['@fos_oauth_server.client_manager.default']
 
     user.mailer:
         class: UserBundle\Mailer\Mailer
