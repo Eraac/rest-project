@@ -1,0 +1,8 @@
+services:
+    core.base_voter:
+        class: CoreBundle\Security\AbstractVoter
+        abstract: true
+        arguments: ['@security.access.decision_manager']
+        public: false
+#        tags:
+#            - { name: security.voter }

@@ -1,3 +1,6 @@
+imports:
+    - { resource: voter.yml }
+
 services:
     user.command.create_client:
         class: UserBundle\Command\CreateClientCommand

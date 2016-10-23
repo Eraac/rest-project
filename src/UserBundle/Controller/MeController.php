@@ -3,34 +3,51 @@
 namespace UserBundle\Controller;
 
 use FOS\RestBundle\Controller\Annotations as FOSRest;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
-use UserBundle\Entity\User;
-use UserBundle\Form\UserEditType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class MeController
+ *
+ * @package UserBundle\Controller
+ *
+ * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
+ */
 class MeController extends AbstractUserController
 {
     /**
      * Return the current user
      *
-     * @return User
+     * @return Response
      */
-    public function getAction() : User
+    public function getAction() : Response
     {
-        return $this->getUser();
+        return $this->forward('UserBundle:User:get', [
+            'u' => $this->getUser()->getId(),
+        ]);
     }
 
     /**
      * Update the current user
      *
-     * @param Request $request
-     *
-     * @return JsonResponse|User
+     * @return Response
      */
-    public function patchAction(Request $request)
+    public function patchAction() : Response
     {
-        $user = $this->getUser();
+        return $this->forward('UserBundle:User:patch', [
+            'u' => $this->getUser()->getId(),
+        ]);
+    }
 
-        return $this->form($request, UserEditType::class, $user, Request::METHOD_PATCH);
+    /**
+     * Delete the current user
+     *
+     * @return Response
+     */
+    public function deleteAction() : Response
+    {
+        return $this->forward('UserBundle:User:delete', [
+            'u' => $this->getUser()->getId(),
+        ]);
     }
 }

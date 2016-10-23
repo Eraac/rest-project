@@ -4,16 +4,16 @@ FOS\UserBundle\Model\User:
     properties:
         id:
             expose: true
-            groups : [user-list, me]
+            groups: [default, user-list, me]
         username:
             expose: true
-            groups : [user-list, me]
+            groups: [default, user-list, me]
         email:
             expose: true
-            groups : [me]
+            groups: [me]
         roles:
             expose: true
-            groups : [me, admin]
+            groups: [me, admin]
         enabled:
             expose: true
-            groups : [admin]
+            groups: [admin]

@@ -106,6 +106,8 @@ fos_oauth_server:
     access_token_class:  UserBundle\Entity\AccessToken
     refresh_token_class: UserBundle\Entity\RefreshToken
     auth_code_class:     UserBundle\Entity\AuthCode
+    service:
+        user_provider: fos_user.user_provider.username_email
 
 # http://symfony.com/doc/current/bundles/NelmioApiDocBundle/configuration-reference.html
 nelmio_api_doc: ~

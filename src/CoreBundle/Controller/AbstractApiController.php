@@ -3,6 +3,7 @@
 namespace CoreBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\Persistence\ObjectRepository;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use Symfony\Component\Form\Form;
@@ -10,6 +11,7 @@ use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class AbstractApiController extends FOSRestController implements ClassResourceInterface
 {
@@ -31,7 +33,7 @@ class AbstractApiController extends FOSRestController implements ClassResourceIn
      *
      * @return object|JsonResponse|Form
      */
-    protected function form(Request $request, $formType, $entity, $method)
+    protected function form(Request $request, $formType, $entity, string $method)
     {
         $form = $this->createForm($formType, $entity, ['method' => $method]);
         $form->handleRequest($request);
@@ -40,7 +42,7 @@ class AbstractApiController extends FOSRestController implements ClassResourceIn
             return $this->formSuccess($entity);
         }
 
-        // avoid return 201 when json is empty
+        // avoid return 200/201 when json is empty
         if (empty(json_decode($request->getContent(), true))) {
             return new JsonResponse(['errors' => [$this->t('core.error.empty_json')]], JsonResponse::HTTP_BAD_REQUEST);
         }
@@ -76,12 +78,22 @@ class AbstractApiController extends FOSRestController implements ClassResourceIn
     }
 
     /**
+     * Add serializer group to the current request
+     *
+     * @param string $group
+     */
+    protected function addSerializerGroup(string $group)
+    {
+        $this->get('core.manager.serializer_groups')->addGroup($group);
+    }
+
+    /**
      * Dispatch an event
      *
      * @param string $name
      * @param Event $event
      */
-    protected function dispatch($name, Event $event)
+    protected function dispatch(string $name, Event $event)
     {
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->get('event_dispatcher');
@@ -98,8 +110,20 @@ class AbstractApiController extends FOSRestController implements ClassResourceIn
      *
      * @return string
      */
-    protected function t($message, array $parameters = [], $domain = 'messages') : string
+    protected function t(string $message, array $parameters = [], string $domain = 'messages') : string
     {
         return $this->get('translator')->trans($message, $parameters, $domain);
+    }
+
+    /**
+     * Shortcut get repository
+     *
+     * @param string $name
+     *
+     * @return ObjectRepository
+     */
+    protected function getRepository(string $name) : ObjectRepository
+    {
+        return $this->getDoctrine()->getRepository($name);
     }
 }

@@ -4,4 +4,4 @@ UserBundle\Entity\User:
     properties:
         confirmed:
             expose: true
-            groups : [me, admin]
+            groups: [me, admin]

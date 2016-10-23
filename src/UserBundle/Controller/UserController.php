@@ -3,14 +3,47 @@
 namespace UserBundle\Controller;
 
 use FOS\RestBundle\Controller\Annotations as FOSRest;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use UserBundle\Entity\User;
 use UserBundle\Form\UserType;
 use UserBundle\Form\UserEditType;
+use UserBundle\Security\UserVoter;
 
 class UserController extends AbstractUserController
 {
+    /**
+     * Return list of users
+     *
+     * @FOSRest\View(serializerGroups={"user-list"})
+     *
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     */
+    public function cgetAction()
+    {
+        return $this->getRepository('UserBundle:User')->findAll();
+    }
+
+    /**
+     * Return an user
+     *
+     * @param User $u
+     *
+     * @return User
+     *
+     * @FOSRest\Get(requirements={"u"="\d+"})
+     * @FOSRest\View(serializerGroups={"default"})
+     *
+     * @Security("is_granted('view', u)") // user is "reserved" by Security(), is remplace by current user
+     */
+    public function getAction(User $u) : User
+    {
+        $this->tryAddSerializerGroupMe($u);
+
+        return $u;
+    }
+
     /**
      * Add an user
      *
@@ -18,7 +51,7 @@ class UserController extends AbstractUserController
      *
      * @return object|\Symfony\Component\HttpFoundation\JsonResponse
      *
-     * @FOSRest\View(serializerGroups={"me"}, statusCode=JsonResponse::HTTP_CREATED)
+     * @FOSRest\View(serializerGroups={"me"})
      */
     public function postAction(Request $request)
     {
@@ -30,6 +63,42 @@ class UserController extends AbstractUserController
     }
 
     /**
+     * Edit an user
+     *
+     * @param Request $request
+     * @param User $u
+     *
+     * @FOSRest\View(serializerGroups={"default"})
+     *
+     * @return object|\Symfony\Component\Form\Form|JsonResponse
+     *
+     * @Security("is_granted('edit', u)") // user is "reserved" by Security(), is remplace by current user
+     */
+    public function patchAction(Request $request, User $u)
+    {
+        $this->tryAddSerializerGroupMe($u);
+
+        return $this->form($request, UserEditType::class, $u, Request::METHOD_PATCH);
+    }
+
+    /**
+     * Remove an user
+     *
+     * @param User $u
+     *
+     * @FOSRest\View()
+     *
+     * @Security("is_granted('delete', u)") // user is "reserved" by Security(), is remplace by current user
+     */
+    public function deleteAction(User $u)
+    {
+        $em = $this->getManager();
+
+        $em->remove($u);
+        $em->flush();
+    }
+
+    /**
      * Confirm an email
      *
      * @param string $token
@@ -37,7 +106,7 @@ class UserController extends AbstractUserController
      * @FOSRest\Post("/users/confirm/{token}")
      * @FOSRest\View(statusCode=JsonResponse::HTTP_NO_CONTENT)
      */
-    public function confirmEmailAction($token)
+    public function confirmEmailAction(string $token)
     {
         $user = $this->findUserByToken($token);
 
@@ -102,7 +171,7 @@ class UserController extends AbstractUserController
      * @FOSRest\Post("/users/reset-password/{token}")
      * @FOSRest\View(statusCode=JsonResponse::HTTP_NO_CONTENT)
      */
-    public function resetPasswordAction(Request $request, $token)
+    public function resetPasswordAction(Request $request, string $token)
     {
         $user = $this->findUserByToken($token);
 
@@ -126,5 +195,29 @@ class UserController extends AbstractUserController
         }
 
         return $form;
+    }
+
+    /**
+     * Return true if $user and current user is the same
+     *
+     * @param User $user
+     *
+     * @return bool
+     */
+    protected function isHimself(User $user) : bool
+    {
+        return $this->isGranted(UserVoter::HIMSELF, $user);
+    }
+
+    /**
+     * Add serializer group "me" if the current user and $user is the same
+     *
+     * @param User $user
+     */
+    protected function tryAddSerializerGroupMe(User $user)
+    {
+        if ($this->isHimself($user)) {
+            $this->addSerializerGroup("me");
+        }
     }
 }

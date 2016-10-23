@@ -2,6 +2,7 @@
 
 namespace CoreBundle\EventListener;
 
+use CoreBundle\Service\serializerGroupsManager;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
@@ -12,10 +13,22 @@ class ExtendedViewResponseListener
      */
     private $authorization;
 
+    /**
+     * @var serializerGroupsManager
+     */
+    private $serializerGroupsManager;
 
-    public function __construct(AuthorizationCheckerInterface $authorizationChecker)
+
+    /**
+     * ExtendedViewResponseListener constructor.
+     *
+     * @param AuthorizationCheckerInterface $authorizationChecker
+     * @param serializerGroupsManager $serializerGroupsManager
+     */
+    public function __construct(AuthorizationCheckerInterface $authorizationChecker, serializerGroupsManager $serializerGroupsManager)
     {
         $this->authorization = $authorizationChecker;
+        $this->serializerGroupsManager = $serializerGroupsManager;
     }
 
     /**
@@ -26,16 +39,7 @@ class ExtendedViewResponseListener
     public function onKernelView(GetResponseForControllerResultEvent $event)
     {
         if ($this->authorization->isGranted('ROLE_ADMIN')) {
-            $viewAttribute = $event->getRequest()->attributes->get('_template');
-
-            if (!is_null($viewAttribute)) {
-
-                $groups = $viewAttribute->getSerializerGroups();
-
-                $groups[] = 'admin';
-
-                $viewAttribute->setSerializerGroups($groups);
-            }
+            $this->serializerGroupsManager->addGroup('admin');
         }
     }
 }

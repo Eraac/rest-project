@@ -1,0 +1,6 @@
+services:
+    user.user_voter:
+        class: UserBundle\Security\UserVoter
+        parent: core.base_voter
+        tags:
+            - { name: security.voter }

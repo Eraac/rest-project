@@ -34,4 +34,12 @@ class UserEditType extends AbstractApiType
 
         parent::configureOptions($resolver);
     }
+
+    /**
+     * @return string
+     */
+    public function getParent() : string
+    {
+        return UserType::class;
+    }
 }

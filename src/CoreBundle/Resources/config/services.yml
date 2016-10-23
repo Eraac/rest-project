@@ -1,7 +1,16 @@
+imports:
+    - { resource: voter.yml }
+
 services:
     core.event.listener.extended_view_response:
         class: CoreBundle\EventListener\ExtendedViewResponseListener
         arguments:
             - "@security.authorization_checker"
+            - "@core.manager.serializer_groups"
         tags:
             - { name: kernel.event_listener, event: kernel.view, method: onKernelView, priority: 101 }
+
+    core.manager.serializer_groups:
+        class: CoreBundle\Service\serializerGroupsManager
+        arguments:
+            - "@request_stack"
