@@ -7,6 +7,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 // https://github.com/FriendsOfSymfony/FOSOAuthServerBundle/pull/372
 class CreateClientCommand extends Command
@@ -15,15 +16,16 @@ class CreateClientCommand extends Command
     const OPTION_GRANT_TYPE = 'grant-type';
 
     /**
-     * @var ClientManager
+     * @var ContainerInterface
      */
-    private $clientManager;
+    private $container;
 
-    public function __construct(ClientManager $clientManager)
+
+    public function __construct(ContainerInterface $container)
     {
         parent::__construct();
 
-        $this->clientManager = $clientManager;
+        $this->container = $container;
     }
 
     /**
@@ -60,13 +62,18 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $client = $this->clientManager->createClient();
+        /** @var ClientManager $clientManager */
+        $clientManager = $this->container->get('fos_oauth_server.client_manager.default');
+        
+        $client = $clientManager->createClient();
+
         $client->setRedirectUris($input->getOption(self::OPTION_REDIRECT_URI));
         $client->setAllowedGrantTypes($input->getOption(self::OPTION_GRANT_TYPE));
-        $this->clientManager->updateClient($client);
+
+        $clientManager->updateClient($client);
 
         $output->writeln('Client created');
-        $output->writeln('client_id='.$client->getId().'_'.$client->getRandomId());
+        $output->writeln('client_id='.$client->getId() . '_' . $client->getRandomId());
         $output->writeln('client_secret='.$client->getSecret());
     }
 }

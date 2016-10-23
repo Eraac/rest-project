@@ -3,7 +3,9 @@ services:
         class: UserBundle\Command\CreateClientCommand
         tags:
             - { name: console.command }
-        arguments: ['@fos_oauth_server.client_manager.default']
+        #arguments: ['@fos_oauth_server.client_manager.default']
+        # sorry https://github.com/doctrine/DoctrineBundle/issues/300
+        arguments: ['@service_container']
 
     user.mailer:
         class: UserBundle\Mailer\Mailer
