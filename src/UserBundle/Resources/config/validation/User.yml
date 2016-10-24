@@ -14,6 +14,5 @@ UserBundle\Entity\User:
                 max: 255
             - Email:
         plainPassword:
-            - NotBlank:
             - Length:
                 max: 255

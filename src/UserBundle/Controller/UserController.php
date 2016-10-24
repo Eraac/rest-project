@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use UserBundle\Entity\User;
+use UserBundle\Form\UserEditAdminType;
 use UserBundle\Form\UserType;
 use UserBundle\Form\UserEditType;
 use UserBundle\Security\UserVoter;
@@ -78,7 +79,10 @@ class UserController extends AbstractUserController
     {
         $this->tryAddSerializerGroupMe($u);
 
-        return $this->form($request, UserEditType::class, $u, Request::METHOD_PATCH);
+        $formType = $this->isGranted('ROLE_ADMIN') ?
+            UserEditAdminType::class : UserEditType::class;
+
+        return $this->form($request, $formType, $u, Request::METHOD_PATCH);
     }
 
     /**
