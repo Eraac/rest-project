@@ -11,6 +11,6 @@ services:
             - { name: kernel.event_listener, event: kernel.view, method: onKernelView, priority: 101 }
 
     core.manager.serializer_groups:
-        class: CoreBundle\Service\serializerGroupsManager
+        class: CoreBundle\Service\SerializerGroupsManager
         arguments:
             - "@request_stack"

@@ -2,7 +2,7 @@
 
 namespace CoreBundle\EventListener;
 
-use CoreBundle\Service\serializerGroupsManager;
+use CoreBundle\Service\SerializerGroupsManager;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
@@ -14,7 +14,7 @@ class ExtendedViewResponseListener
     private $authorization;
 
     /**
-     * @var serializerGroupsManager
+     * @var SerializerGroupsManager
      */
     private $serializerGroupsManager;
 
@@ -25,7 +25,7 @@ class ExtendedViewResponseListener
      * @param AuthorizationCheckerInterface $authorizationChecker
      * @param serializerGroupsManager $serializerGroupsManager
      */
-    public function __construct(AuthorizationCheckerInterface $authorizationChecker, serializerGroupsManager $serializerGroupsManager)
+    public function __construct(AuthorizationCheckerInterface $authorizationChecker, SerializerGroupsManager $serializerGroupsManager)
     {
         $this->authorization = $authorizationChecker;
         $this->serializerGroupsManager = $serializerGroupsManager;

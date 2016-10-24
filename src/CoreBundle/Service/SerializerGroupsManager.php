@@ -4,7 +4,7 @@ namespace CoreBundle\Service;
 
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class serializerGroupsManager
+class SerializerGroupsManager
 {
     /**
      * @var RequestStack
