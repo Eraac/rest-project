@@ -14,3 +14,6 @@ services:
         class: CoreBundle\Service\SerializerGroupsManager
         arguments:
             - "@request_stack"
+
+    core.paginator:
+        class: CoreBundle\Service\Paginator

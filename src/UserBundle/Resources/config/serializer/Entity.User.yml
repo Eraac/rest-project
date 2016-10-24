@@ -5,3 +5,13 @@ UserBundle\Entity\User:
         confirmed:
             expose: true
             groups: [me, admin]
+
+    relations:
+        -
+            rel: self
+            href:
+                route: api_get_user
+                parameters:
+                    u: expr(object.getId())
+            exclusion:
+                groups: [default, user-list, me, admin]

@@ -17,13 +17,15 @@ class UserController extends AbstractUserController
     /**
      * Return list of users
      *
-     * @FOSRest\View(serializerGroups={"user-list"})
+     * @FOSRest\View(serializerGroups={"Default", "user-list"})
      *
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      */
-    public function cgetAction()
+    public function cgetAction(Request $request)
     {
-        return $this->getRepository('UserBundle:User')->findAll();
+        $qb = $this->getDoctrine()->getRepository('UserBundle:User')->qbFindAll();
+
+        return $this->paginate($qb, $request);
     }
 
     /**

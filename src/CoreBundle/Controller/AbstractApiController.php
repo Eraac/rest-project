@@ -2,21 +2,22 @@
 
 namespace CoreBundle\Controller;
 
+use CoreBundle\Service\Paginator;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\ORM\QueryBuilder;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Routing\ClassResourceInterface;
+use Hateoas\Representation\PaginatedRepresentation;
 use Symfony\Component\Form\Form;
 use Symfony\Component\EventDispatcher\Event;
-use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class AbstractApiController extends FOSRestController implements ClassResourceInterface
 {
     /**
-     * @return ObjectManager
+     * @return Object|ObjectManager
      */
     protected function getManager() : ObjectManager
     {
@@ -75,6 +76,21 @@ class AbstractApiController extends FOSRestController implements ClassResourceIn
 
         $em->persist($entity);
         $em->flush();
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param Request $request
+     * @param array $routeParameters
+     *
+     * @return PaginatedRepresentation
+     */
+    protected function paginate(QueryBuilder $qb, Request $request, array $routeParameters = []) : PaginatedRepresentation
+    {
+        /** @var Paginator $paginator */
+        $paginator = $this->get('core.paginator');
+
+        return $paginator->paginate($qb, $request, $routeParameters);
     }
 
     /**
