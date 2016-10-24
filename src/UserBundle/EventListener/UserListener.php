@@ -3,35 +3,37 @@
 namespace UserBundle\EventListener;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use FOS\UserBundle\Mailer\MailerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use UserBundle\Entity\User;
+use UserBundle\Mailer\Mailer;
 
 class UserListener
 {
     /**
-     * @var MailerInterface
+     * @var ContainerInterface
      */
-    private $mailer;
-
-    /**
-     * @var TokenGeneratorInterface
-     */
-    private $tokenGenerator;
+    private $container;
 
 
-    public function __construct(MailerInterface $mailer, TokenGeneratorInterface $tokenGenerator)
+    //public function __construct(MailerInterface $mailer, TokenGeneratorInterface $tokenGenerator)
+    public function __construct(ContainerInterface $container)
     {
-        $this->mailer = $mailer;
-        $this->tokenGenerator = $tokenGenerator;
+        $this->container = $container;
     }
 
     public function prePersistHandler(User $user, LifecycleEventArgs $event)
     {
+        /** @var TokenGeneratorInterface $tokenGenerator */
+        $tokenGenerator = $this->container->get('fos_user.util.token_generator');
+
+        /** @var Mailer $mailer */
+        $mailer = $this->container->get('user.mailer');
+
         $user->setEnabled(true);
         $user->setConfirmed(false);
-        $user->setConfirmationToken($this->tokenGenerator->generateToken());
+        $user->setConfirmationToken($tokenGenerator->generateToken());
 
-        $this->mailer->sendConfirmationEmailMessage($user);
+        $mailer->sendConfirmationEmailMessage($user);
     }
 }

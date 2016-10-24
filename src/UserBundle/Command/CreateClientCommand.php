@@ -16,16 +16,16 @@ class CreateClientCommand extends Command
     const OPTION_GRANT_TYPE = 'grant-type';
 
     /**
-     * @var ContainerInterface
+     * @var ClientManager
      */
-    private $container;
+    private $clientManager;
 
 
-    public function __construct(ContainerInterface $container)
+    public function __construct(ClientManager $clientManager)
     {
         parent::__construct();
 
-        $this->container = $container;
+        $this->clientManager = $clientManager;
     }
 
     /**
@@ -62,15 +62,12 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        /** @var ClientManager $clientManager */
-        $clientManager = $this->container->get('fos_oauth_server.client_manager.default');
-        
-        $client = $clientManager->createClient();
+        $client = $this->clientManager->createClient();
 
         $client->setRedirectUris($input->getOption(self::OPTION_REDIRECT_URI));
         $client->setAllowedGrantTypes($input->getOption(self::OPTION_GRANT_TYPE));
 
-        $clientManager->updateClient($client);
+        $this->clientManager->updateClient($client);
 
         $output->writeln('Client created');
         $output->writeln('client_id='.$client->getId() . '_' . $client->getRandomId());
