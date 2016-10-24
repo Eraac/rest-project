@@ -1,0 +1,3 @@
+core:
+    error:
+        invalid_boolean: "This value isn't a valid boolean"
