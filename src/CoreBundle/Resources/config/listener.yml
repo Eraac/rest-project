@@ -1,0 +1,18 @@
+services:
+    core.event.listener.extended_view_response:
+        class: CoreBundle\EventListener\ExtendedViewResponseListener
+        arguments:
+            - "@security.authorization_checker"
+            - "@core.manager.serializer_groups"
+        tags:
+            - { name: kernel.event_listener, event: kernel.view, method: onKernelView, priority: 101 }
+
+    core.event.listener.log_request:
+        class: CoreBundle\EventListener\LogRequestListener
+        arguments:
+            - "@logger"
+            - "@security.token_storage"
+            - "@doctrine.orm.entity_manager"
+            - "%enable_log_request%"
+        tags:
+            - { name: kernel.event_listener, event: kernel.terminate, method: onKernelTerminate, priority: -255 }
