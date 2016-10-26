@@ -23,3 +23,10 @@ services:
             - '@service_container'
         tags:
             - { name: doctrine.orm.entity_listener, entity: UserBundle\Entity\User, event: prePersist, method: prePersistHandler }
+
+    user.user_edit_admin_type:
+        class: UserBundle\Form\UserEditAdminType
+        arguments:
+            - "@security.token_storage"
+        tags:
+            - { name: form.type }
