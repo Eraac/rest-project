@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @package UserBundle\Controller
  *
+ * @FOSRest\Version("1.0")
+ *
  * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
  */
 class MeController extends AbstractUserController

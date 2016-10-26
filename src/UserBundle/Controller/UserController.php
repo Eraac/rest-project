@@ -12,6 +12,13 @@ use UserBundle\Form\UserType;
 use UserBundle\Form\UserEditType;
 use UserBundle\Security\UserVoter;
 
+/**
+ * Class UserController
+ *
+ * @FOSRest\Version("1.0")
+ *
+ * @package UserBundle\Controller
+ */
 class UserController extends AbstractUserController
 {
     /**
