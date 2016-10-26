@@ -124,7 +124,7 @@ class LogRequestListener
             $content = json_decode($content, true);
 
             if (isset($content['password'])) {
-                $content['password'] = "--REMOVED--";
+                $content['password'] = "******";
             }
         }
 
