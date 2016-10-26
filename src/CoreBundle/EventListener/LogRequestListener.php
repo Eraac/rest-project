@@ -42,10 +42,10 @@ class LogRequestListener
      */
     public function __construct(Logger $logger, TokenStorage $tokenStorage, EntityManager $entityManager, $isEnable)
     {
-        $this->logger = $logger;
+        $this->logger       = $logger;
         $this->tokenStorage = $tokenStorage;
-        $this->em = $entityManager;
-        $this->isEnable = $isEnable;
+        $this->em           = $entityManager;
+        $this->isEnable     = $isEnable;
     }
 
     public function onKernelTerminate(PostResponseEvent $event)
@@ -53,7 +53,7 @@ class LogRequestListener
         /** @var Request $request */
         $request = $event->getRequest();
 
-        if (!$this->isEnable && !$this->isLoggableRequest($request)) {
+        if (!$this->isEnable || !$this->isLoggableRequest($request)) {
             return;
         }
 
@@ -61,7 +61,7 @@ class LogRequestListener
             /** @var Response $response */
             $response = $event->getResponse();
 
-            $route = $request->get('_route') ?? "forward";
+            $route = $request->get('_route');
 
             $content = $this->cleanSensitiveContent($route, $request->getContent());
 
@@ -99,10 +99,13 @@ class LogRequestListener
     {
         $notLoggableMethods = [
             Request::METHOD_HEAD,
-            Request::METHOD_OPTIONS
+            Request::METHOD_OPTIONS,
         ];
 
-        return !in_array($request->getMethod(), $notLoggableMethods);
+        $route = $request->get('_route') ?? '_';
+
+        return !in_array($request->getMethod(), $notLoggableMethods)
+            && '_' !== $route[0];
     }
 
     /**
