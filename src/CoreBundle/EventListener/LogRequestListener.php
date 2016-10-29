@@ -76,7 +76,7 @@ class LogRequestListener
                 ->setContent($content)
                 ->setStatus($response->getStatusCode())
                 ->setIp($request->getClientIp())
-                ->setUser($user)
+                ->setUser(!is_string($user) ? $user : null)
                 ->setCreatedAt(new \DateTime()) // necessary because without doctrine set NULL and mysql return an error (field cann't be null)
             ;
 
@@ -101,10 +101,16 @@ class LogRequestListener
             Request::METHOD_OPTIONS,
         ];
 
+        $notLoggableRoutes = [
+            'nelmio_api_doc_index',
+        ];
+
         $route = $request->get('_route') ?? '_';
 
-        return !in_array($request->getMethod(), $notLoggableMethods)
-            && '_' !== $route[0];
+        return
+            !in_array($request->getMethod(), $notLoggableMethods)
+            && '_' !== $route[0]
+            && !in_array($route, $notLoggableRoutes);
     }
 
     /**
