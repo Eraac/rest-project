@@ -2,8 +2,8 @@
 
 namespace UserBundle\Form;
 
-use CoreBundle\Form\AbstractApiType;
-use CoreBundle\Form\BooleanType;
+use CoreBundle\Form\Type\AbstractApiType;
+use CoreBundle\Form\Type\BooleanType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;

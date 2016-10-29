@@ -2,7 +2,7 @@
 
 namespace CoreBundle\Parser;
 
-use CoreBundle\Form\BooleanType;
+use CoreBundle\Form\Type\BooleanType;
 use Nelmio\ApiDocBundle\Parser\ValidationParser;
 use Nelmio\ApiDocBundle\Parser\FormTypeParser;
 use Nelmio\ApiDocBundle\Parser\ParserInterface;

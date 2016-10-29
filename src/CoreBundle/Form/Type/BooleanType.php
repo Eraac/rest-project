@@ -1,6 +1,6 @@
 <?php
 
-namespace CoreBundle\Form;
+namespace CoreBundle\Form\Type;
 
 use CoreBundle\Form\DataTransformer\BooleanTransformer;
 use Symfony\Component\Form\AbstractType as Base;
