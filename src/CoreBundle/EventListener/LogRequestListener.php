@@ -72,7 +72,7 @@ class LogRequestListener
                 ->setRoute($route)
                 ->setPath($request->getPathInfo())
                 ->setMethod($request->getMethod())
-                ->setQuery($request->getQueryString())
+                ->setQuery(urldecode($request->getQueryString()))
                 ->setContent($content)
                 ->setStatus($response->getStatusCode())
                 ->setIp($request->getClientIp())
