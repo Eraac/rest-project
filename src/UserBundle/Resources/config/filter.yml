@@ -1,0 +1,6 @@
+services:
+    user.user_filter:
+        class: UserBundle\Filter\UserFilter
+        parent: core.abstract_filter
+        arguments: ['@user.user_repository']
+        public: true

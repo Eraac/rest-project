@@ -1,3 +1,9 @@
 core:
     error:
         empty_json: "JSON can't be empty"
+        invalid_filter: "Filter %filter% isn't valid"
+        invalid_order_by: "Sort by %order_by% isn't valid"
+        invalid_order: "Order %order% isn't valid"
+        wrong_filter: "Something is wrong with the filter"
+        filter:
+            timestamp: "Value %timestamp% isn't a valid timestamp"

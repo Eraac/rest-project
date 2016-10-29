@@ -1,6 +1,7 @@
 imports:
     - { resource: voter.yml }
     - { resource: listener.yml }
+    - { resource: filter.yml }
 
 services:
     core.manager.serializer_groups:

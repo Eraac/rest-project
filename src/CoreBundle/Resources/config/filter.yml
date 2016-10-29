@@ -1,0 +1,12 @@
+services:
+    core.abstract_filter:
+        class: CoreBundle\Filter\AbstractFilter
+        arguments: ['@translator.default']
+        abstract: true
+        public: false
+
+    core.date_filter:
+        class: CoreBundle\Filter\AbstractDateFilter
+        parent: core.abstract_filter
+        abstract: true
+        public: false

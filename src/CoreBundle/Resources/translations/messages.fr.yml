@@ -1,3 +1,9 @@
 core:
     error:
         empty_json: "Le JSON ne peut pas être vide"
+        invalid_filter: "Le filter %filter% n'est pas valide"
+        invalid_order_by: "Le tri par %order_by% n'est pas valide"
+        invalid_order: "L'order par %order% n'est pas valide"
+        wrong_filter: "Une erreur est survenue sur les filtres"
+        filter:
+            timestamp: "La valeur %timestamp% n'est pas un timestamp valide"

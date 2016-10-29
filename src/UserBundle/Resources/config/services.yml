@@ -1,5 +1,7 @@
 imports:
     - { resource: voter.yml }
+    - { resource: repository.yml }
+    - { resource: filter.yml }
 
 services:
     user.command.create_client:

@@ -2,6 +2,8 @@
 
 namespace CoreBundle\Controller;
 
+use CoreBundle\Exception\InvalidFilterException;
+use CoreBundle\Filter\AbstractFilter;
 use CoreBundle\Service\Paginator;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
@@ -43,7 +45,19 @@ class AbstractApiController extends FOSRestController implements ClassResourceIn
             return $this->formSuccess($entity);
         }
 
-        // avoid return 200/201 when json is empty
+        return $this->formError($request, $form);
+    }
+
+    /**
+     * Avoid return 2xx if the body is empty and form isn't submit
+     *
+     * @param Request $request
+     * @param Form    $form
+     *
+     * @return Form|JsonResponse
+     */
+    protected function formError(Request $request, Form $form)
+    {
         if (empty(json_decode($request->getContent(), true))) {
             return new JsonResponse(['errors' => [$this->t('core.error.empty_json')]], JsonResponse::HTTP_BAD_REQUEST);
         }
@@ -141,5 +155,34 @@ class AbstractApiController extends FOSRestController implements ClassResourceIn
     protected function getRepository(string $name) : ObjectRepository
     {
         return $this->getDoctrine()->getRepository($name);
+    }
+
+    /**
+     * @param string       $filter
+     * @param QueryBuilder $qb
+     * @param Request      $request
+     *
+     * @throws \Exception|InvalidFilterException
+     *
+     * @return QueryBuilder
+     */
+    protected function applyFilter(string $filter, QueryBuilder $qb, Request $request) : QueryBuilder
+    {
+        assert($this->has($filter), new \LogicException(sprintf('service %s doesn\'t exist !', $filter)));
+
+        /** @var AbstractFilter $filter */
+        $filter = $this->get($filter);
+
+        try {
+            $qb = $filter->applyFilter($qb, $request->query->get('filter', []));
+        } catch (InvalidFilterException $e) {
+            throw $e;
+        } catch (\Exception $e) {
+            throw new InvalidFilterException(
+                $this->t('core.error.wrong_filter'), $e
+            );
+        }
+
+        return $qb;
     }
 }

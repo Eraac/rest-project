@@ -31,6 +31,7 @@ class UserController extends AbstractUserController
     public function cgetAction(Request $request)
     {
         $qb = $this->getDoctrine()->getRepository('UserBundle:User')->qbFindAll();
+        $qb = $this->applyFilter('user.user_filter', $qb, $request);
 
         return $this->paginate($qb, $request);
     }
@@ -202,12 +203,7 @@ class UserController extends AbstractUserController
             $this->updateUser($user);
         }
 
-        // avoid return 204 when json is empty
-        if (empty(json_decode($request->getContent(), true))) {
-            return new JsonResponse(['errors' => [$this->t('core.error.empty_json')]], JsonResponse::HTTP_BAD_REQUEST);
-        }
-
-        return $form;
+        return $this->formError($request, $form);
     }
 
     /**
