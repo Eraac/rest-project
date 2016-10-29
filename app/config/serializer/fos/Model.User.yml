@@ -2,9 +2,6 @@ FOS\UserBundle\Model\User:
     exclusion_policy: ALL
 
     properties:
-        id:
-            expose: true
-            groups: [default, user-list, me]
         username:
             expose: true
             groups: [default, user-list, me]

@@ -21,6 +21,13 @@ class User extends BaseUser
     protected $id;
 
     /**
+     * User password
+     *
+     * @var string
+     */
+    protected $plainPassword;
+
+    /**
      * If user has validate email
      *
      * @var boolean

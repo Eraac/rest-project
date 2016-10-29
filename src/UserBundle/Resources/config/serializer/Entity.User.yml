@@ -2,6 +2,9 @@ UserBundle\Entity\User:
     exclusion_policy: ALL
 
     properties:
+        id:
+            expose: true
+            groups: [default, user-list, me]
         confirmed:
             expose: true
             groups: [me, admin]
@@ -12,6 +15,6 @@ UserBundle\Entity\User:
             href:
                 route: api_get_user
                 parameters:
-                    u: expr(object.getId())
+                    user_id: expr(object.getId())
             exclusion:
                 groups: [default, user-list, me, admin]

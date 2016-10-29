@@ -28,5 +28,5 @@ confirmation:
 user:
     error:
         forget_password:
-            empty_username: "Le nom d'utilisateur ne peut pas être vide"
+            wrong_email: "L'email d'utilisateur n'est pas valide"
             not_found: "Le nom d'utilisateur n'existe pas"

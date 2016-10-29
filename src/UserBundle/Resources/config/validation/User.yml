@@ -5,14 +5,8 @@ UserBundle\Entity\User:
 
     properties:
         username:
-            - NotBlank:
-            - Length:
-                max: 255
+            - Type: string
         email:
-            - NotBlank:
-            - Length:
-                max: 255
-            - Email:
+            - Type: string
         plainPassword:
-            - Length:
-                max: 255
+            - Type: string
