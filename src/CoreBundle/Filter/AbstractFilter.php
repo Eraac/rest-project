@@ -57,11 +57,6 @@ abstract class AbstractFilter
 
             $this->validate($key, $criteria);
 
-            if (is_array($qb)) {
-                var_dump($qb);
-                die;
-            }
-
             call_user_func_array($method, [$qb, $criteria]);
         }
 
