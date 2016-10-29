@@ -4,7 +4,6 @@ namespace UserBundle\Controller;
 
 use CoreBundle\Controller\AbstractApiController;
 use FOS\UserBundle\Doctrine\UserManager;
-use FOS\RestBundle\Controller\Annotations as FOSRest;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use UserBundle\Entity\User;
 
@@ -31,7 +30,7 @@ class AbstractUserController extends AbstractApiController
     }
 
     /**
-     * Find an user by confirmation token
+     * Find an  by confirmation token
      *
      * @param string $token
      *

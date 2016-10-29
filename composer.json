@@ -1,5 +1,6 @@
 {
     "name": "kevin/project",
+    "description": "Project use for create a RESTful API",
     "license": "proprietary",
     "type": "project",
     "autoload": {

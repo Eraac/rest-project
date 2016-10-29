@@ -2,7 +2,6 @@
 
 namespace CoreBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
 abstract class AbstractDateRepository extends AbstractRepository
