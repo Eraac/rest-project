@@ -17,7 +17,7 @@ parameters:
     mailer_sender:     no-reply@domain.tld
 
     # A secret key that's used to generate certain security-related tokens
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    secret:            965436407b8b3ac3d595e96d85b5fa06c90973f9
 
     # cors
     cors_allow_origin: http://localhost
