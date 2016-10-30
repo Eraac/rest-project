@@ -9,19 +9,22 @@ use Nelmio\ApiDocBundle\Parser\JmsMetadataParser;
 interface Docs
 {
     // Header
-    const CONTENT_TYPE_HEADER   = ['name' => 'Content-Type', 'description' => 'Format of the request', 'required' => true, 'default' => 'application/json'];
-    const ACCEPT_VERSION_HEADER = ['name' => 'X-Accept-Version', 'description' => 'Version of the api', 'required' => true, 'default' => '1.0'];
-    const AUTHORIZATION_HEADER  = ['name' => 'Authorization', 'description' => 'User token', 'required' => true, 'default' => 'Bearer {token}'];
+    const CONTENT_TYPE_HEADER    = ['name' => 'Content-Type', 'description' => 'Format of the request', 'required' => true, 'default' => 'application/json'];
+    const ACCEPT_VERSION_HEADER  = ['name' => 'X-Accept-Version', 'description' => 'Version of the api', 'required' => true, 'default' => '1.0'];
+    const ACCEPT_LANGUAGE_HEADER = ['name' => 'Accept-Language', 'description' => 'Language use for the response', 'required' => false, 'default' => 'en'];
+    const AUTHORIZATION_HEADER   = ['name' => 'Authorization', 'description' => 'User token', 'required' => true, 'default' => 'Bearer {token}'];
 
     const DEFAULT_HEADERS = [
         self::CONTENT_TYPE_HEADER,
-        self::ACCEPT_VERSION_HEADER
+        self::ACCEPT_VERSION_HEADER,
+        self::ACCEPT_LANGUAGE_HEADER
     ];
 
     const AUTH_HEADERS = [
         self::CONTENT_TYPE_HEADER,
         self::ACCEPT_VERSION_HEADER,
-        self::AUTHORIZATION_HEADER
+        self::AUTHORIZATION_HEADER,
+        self::ACCEPT_LANGUAGE_HEADER
     ];
 
     // Filter
