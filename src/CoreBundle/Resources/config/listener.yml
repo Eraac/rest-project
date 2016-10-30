@@ -16,3 +16,9 @@ services:
             - "%enable_log_request%"
         tags:
             - { name: kernel.event_listener, event: kernel.terminate, method: onKernelTerminate, priority: -255 }
+
+    core.locale_listener:
+        class: CoreBundle\EventListener\LocaleListener
+        arguments: ['%kernel.default_locale%']
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 16 }
