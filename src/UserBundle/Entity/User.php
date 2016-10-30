@@ -47,9 +47,13 @@ class User extends BaseUser
 
     /**
      * @param boolean $confirmed
+     *
+     * @return User
      */
     public function setConfirmed(bool $confirmed)
     {
         $this->confirmed = $confirmed;
+
+        return $this;
     }
 }

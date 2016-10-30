@@ -8,7 +8,7 @@ use UserBundle\Entity\User;
 
 class UserVoter extends AbstractVoter
 {
-    const HIMSELF = "himself";
+    const ADD_ME = "addMe";
 
     /**
      * @param string $attribute
@@ -18,7 +18,9 @@ class UserVoter extends AbstractVoter
      */
     protected function supports($attribute, $subject) : bool
     {
-        return parent::supports($attribute, $subject) && $subject instanceof User;
+        return
+            (parent::supports($attribute, $subject) || self::ADD_ME == $attribute)
+            && $subject instanceof User;
     }
 
     /**
@@ -81,7 +83,7 @@ class UserVoter extends AbstractVoter
      *
      * @return bool
      */
-    protected function canHimself(User $user, TokenInterface $token) : bool
+    protected function canAddMe(User $user, TokenInterface $token) : bool
     {
         return $this->isHimself($user, $token);
     }

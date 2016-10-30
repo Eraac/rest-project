@@ -207,12 +207,12 @@ class UserController extends AbstractUserController implements UserDocs
      * @param Request $request
      * @param string $token
      *
-     * @return null|JsonResponse
+     * @return User|JsonResponse
      *
      * @ApiDoc(UserDocs::RESET)
      *
      * @FOSRest\Post("/users/reset-password/{token}")
-     * @FOSRest\View(statusCode=JsonResponse::HTTP_NO_CONTENT)
+     * @FOSRest\View(serializerGroups={"me"})
      */
     public function resetPasswordAction(Request $request, string $token)
     {
@@ -230,6 +230,8 @@ class UserController extends AbstractUserController implements UserDocs
             $user->setPasswordRequestedAt(null);
 
             $this->updateUser($user);
+
+            return $user;
         }
 
         return $this->formError($request, $form);
@@ -244,7 +246,7 @@ class UserController extends AbstractUserController implements UserDocs
      */
     protected function isHimself(User $user) : bool
     {
-        return $this->isGranted(UserVoter::HIMSELF, $user);
+        return $this->isGranted(UserVoter::ADD_ME, $user);
     }
 
     /**

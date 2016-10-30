@@ -13,7 +13,6 @@ services:
 
     user.mailer:
         class: UserBundle\Mailer\Mailer
-        public: false
         arguments:
             - '@mailer'
             - '@twig'

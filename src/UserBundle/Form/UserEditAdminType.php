@@ -49,6 +49,7 @@ class UserEditAdminType extends AbstractApiType
     {
         $resolver->setDefaults(array(
             'data_class' => User::class,
+            'validation_groups' => ['Default', 'Registration']
         ));
 
         parent::configureOptions($resolver);
