@@ -6,6 +6,9 @@ use CoreBundle\Exception\InvalidFilterException;
 
 abstract class AbstractDateFilter extends AbstractFilter
 {
+    const CREATED_BEFORE = 'created_before';
+    const CREATED_AFTER  = 'created_after';
+
     /**
      * @inheritdoc
      */
@@ -14,8 +17,8 @@ abstract class AbstractDateFilter extends AbstractFilter
         return array_merge(
             parent::getMapping(),
             [
-                'created_before' => [$this->repo, 'filterByCreatedBefore'],
-                'created_after' => [$this->repo, 'filterByCreatedAfter'],
+                self::CREATED_BEFORE => [$this->repo, 'filterByCreatedBefore'],
+                self::CREATED_AFTER  => [$this->repo, 'filterByCreatedAfter'],
             ]
         );
     }
@@ -25,8 +28,8 @@ abstract class AbstractDateFilter extends AbstractFilter
         return array_merge(
             parent::getMappingValidate(),
             [
-                'created_before' => [$this, 'validateTimestamp'],
-                'created_after' => [$this, 'validateTimestamp'],
+                self::CREATED_BEFORE => [$this, 'validateTimestamp'],
+                self::CREATED_AFTER  => [$this, 'validateTimestamp'],
             ]
         );
     }

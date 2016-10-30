@@ -3,9 +3,10 @@
 namespace UserBundle\Controller;
 
 use FOS\RestBundle\Controller\Annotations as FOSRest;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use CoreBundle\Annotation\ApiDoc;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
+use UserBundle\Docs\MeDocs;
 
 /**
  * Class MeController
@@ -16,26 +17,12 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
  */
-class MeController extends AbstractUserController
+class MeController extends AbstractUserController implements MeDocs
 {
     /**
      * Return the current user
      *
-     * @ApiDoc(
-     *   section = "Me",
-     *   resource = true,
-     *   output = {
-     *      "class"= "UserBundle\Entity\User",
-     *      "parsers"= {
-     *          "Nelmio\ApiDocBundle\Parser\JmsMetadataParser"
-     *      },
-     *      "groups"= {"default", "me"}
-     *   },
-     *   statusCodes = {
-     *      Response::HTTP_OK = "Returned when is successful",
-     *      Response::HTTP_UNAUTHORIZED = "Returned when you aren't authenticate"
-     *   },
-     * )
+     * @ApiDoc(MeDocs::GET)
      *
      * @return Response
      */
@@ -49,28 +36,7 @@ class MeController extends AbstractUserController
     /**
      * Update the current user
      *
-     * @ApiDoc(
-     *   section = "Me",
-     *   resource = true,
-     *   output = {
-     *      "class"= "UserBundle\Entity\User",
-     *      "parsers"= {
-     *          "Nelmio\ApiDocBundle\Parser\JmsMetadataParser"
-     *      },
-     *      "groups"= {"default", "me"}
-     *   },
-     *   input = {
-     *      "class" = "UserBundle\Form\UserEditType",
-     *      "parsers" = {
-     *          "CoreBundle\Parser\Parser"
-     *      },
-     *   },
-     *   statusCodes = {
-     *      Response::HTTP_OK = "Returned when user is changed",
-     *      Response::HTTP_BAD_REQUEST = "Returned when one or more parameters are invalid",
-     *      Response::HTTP_UNAUTHORIZED = "Returned when you aren't authenticate",
-     *   },
-     * )
+     * @ApiDoc(MeDocs::PATCH)
      *
      * @return Response
      */
@@ -84,14 +50,7 @@ class MeController extends AbstractUserController
     /**
      * Delete the current user
      *
-     * @ApiDoc(
-     *   section = "Me",
-     *   resource = true,
-     *   statusCodes = {
-     *      Response::HTTP_NO_CONTENT = "Returned when user is removed",
-     *      Response::HTTP_UNAUTHORIZED = "Returned when you aren't authenticate",
-     *   }
-     * )
+     * @ApiDoc(MeDocs::DELETE)
      *
      * @return Response
      */
