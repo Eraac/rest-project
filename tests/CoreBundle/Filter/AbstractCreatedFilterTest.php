@@ -6,7 +6,7 @@ use Doctrine\ORM\QueryBuilder;
 use Tests\CoreBundle\Filter\AbstractFilterTest;
 use UserBundle\Repository\UserRepository;
 
-abstract class AbstractDateFilterTest extends AbstractFilterTest
+abstract class AbstractCreatedFilterTest extends AbstractFilterTest
 {
     /**
      * @inheritDoc

@@ -4,10 +4,10 @@ namespace CoreBundle\Filter;
 
 use CoreBundle\Exception\InvalidFilterException;
 
-abstract class AbstractDateFilter extends AbstractFilter
+abstract class AbstractCreatedFilter extends AbstractFilter
 {
-    const CREATED_BEFORE = 'created_before';
-    const CREATED_AFTER  = 'created_after';
+    const UPDATED_BEFORE = 'created_before';
+    const UPDATED_AFTER  = 'created_after';
 
     /**
      * @inheritdoc
@@ -17,19 +17,22 @@ abstract class AbstractDateFilter extends AbstractFilter
         return array_merge(
             parent::getMapping(),
             [
-                self::CREATED_BEFORE => [$this->repo, 'filterByCreatedBefore'],
-                self::CREATED_AFTER  => [$this->repo, 'filterByCreatedAfter'],
+                self::UPDATED_BEFORE => [$this->repo, 'filterByCreatedBefore'],
+                self::UPDATED_AFTER  => [$this->repo, 'filterByCreatedAfter'],
             ]
         );
     }
 
+    /**
+     * @inheritdoc
+     */
     protected function getMappingValidate() : array
     {
         return array_merge(
             parent::getMappingValidate(),
             [
-                self::CREATED_BEFORE => [$this, 'validateTimestamp'],
-                self::CREATED_AFTER  => [$this, 'validateTimestamp'],
+                self::UPDATED_BEFORE => [$this, 'validateTimestamp'],
+                self::UPDATED_AFTER  => [$this, 'validateTimestamp'],
             ]
         );
     }

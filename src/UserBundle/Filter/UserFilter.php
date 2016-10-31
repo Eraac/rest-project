@@ -2,9 +2,9 @@
 
 namespace UserBundle\Filter;
 
-use CoreBundle\Filter\AbstractDateFilter;
+use CoreBundle\Filter\AbstractUpdatedFilter;
 
-class UserFilter extends AbstractDateFilter
+class UserFilter extends AbstractUpdatedFilter
 {
     /**
      * @inheritdoc

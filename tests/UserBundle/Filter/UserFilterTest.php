@@ -4,10 +4,10 @@ namespace Tests\UserBundle\Filter;
 
 use CoreBundle\Filter\AbstractFilter;
 use Doctrine\ORM\QueryBuilder;
-use Tests\CoreBundle\Filter\AbstractDateFilterTest;
+use Tests\CoreBundle\Filter\AbstractUpdatedFilterTest;
 use UserBundle\Repository\UserRepository;
 
-class UserFilterTest extends AbstractDateFilterTest
+class UserFilterTest extends AbstractUpdatedFilterTest
 {
     protected function getFilter() : AbstractFilter
     {
