@@ -1,0 +1,3 @@
+log_request:
+    type: rest
+    resource: CoreBundle\Controller\LogRequestController

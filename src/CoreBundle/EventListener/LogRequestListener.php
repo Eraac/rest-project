@@ -107,6 +107,8 @@ class LogRequestListener
 
         $notLoggableRoutes = [
             'nelmio_api_doc_index',
+            'api_get_log_requests',
+            'api_get_log_request',
         ];
 
         $route = $request->get('_route') ?? '_';

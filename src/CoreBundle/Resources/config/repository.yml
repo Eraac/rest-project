@@ -1,0 +1,5 @@
+services:
+    core.log_request_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments: ['CoreBundle:LogRequest']

@@ -5,8 +5,8 @@ services:
         abstract: true
         public: false
 
-    core.date_filter:
-        class: CoreBundle\Filter\AbstractDateFilter
+    core.log_request_filter:
+        class: CoreBundle\Filter\LogRequestFilter
         parent: core.abstract_filter
-        abstract: true
-        public: false
+        arguments: ['@core.log_request_repository']
+        public: true
