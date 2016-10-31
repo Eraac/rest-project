@@ -32,6 +32,8 @@ interface Docs
     const FILTER_PAGINATION_LIMIT = ['name' => Paginator::LIMIT, 'dataType' => 'integer', 'description' => 'Limit ot items per page', 'default' => Paginator::DEFAULT_LIMIT];
     const FILTER_CREATED_BEFORE   = ['name' => 'filter[created_before]', 'dataType' => 'integer', 'pattern' => '{unix timestamp}'];
     const FILTER_CREATED_AFTER    = ['name' => 'filter[created_after]',  'dataType' => 'integer', 'pattern' => '{unix timestamp}'];
+    const FILTER_UPDATED_BEFORE   = ['name' => 'filter[updated_before]', 'dataType' => 'integer', 'pattern' => '{unix timestamp}'];
+    const FILTER_UPDATED_AFTER    = ['name' => 'filter[updated_after]',  'dataType' => 'integer', 'pattern' => '{unix timestamp}'];
 
     // Parser
     const OUTPUT_PARSER = [

@@ -54,6 +54,8 @@ interface UserDocs extends Docs
             ['name' => 'filter[_order][username]', 'pattern' => '(ASC|DESC)', 'description' => 'Order by username'],
             self::FILTER_CREATED_BEFORE,
             self::FILTER_CREATED_AFTER,
+            self::FILTER_UPDATED_BEFORE,
+            self::FILTER_UPDATED_AFTER,
             self::FILTER_PAGINATION_PAGE,
             self::FILTER_PAGINATION_LIMIT,
         ],
