@@ -45,9 +45,9 @@ abstract class AbstractDateRepository extends AbstractRepository
     /**
      * @param int|string $timestamp
      *
-     * @return \DateTime
+     * @return bool|\DateTime
      */
-    protected function dateFromTimestamp($timestamp) : \DateTime
+    protected function dateFromTimestamp($timestamp)
     {
         return \DateTime::createFromFormat('U', $timestamp);
     }

@@ -39,7 +39,7 @@ abstract class AbstractDateFilter extends AbstractFilter
      *
      * @throws InvalidFilterException
      */
-    private function validateTimestamp($timestamp)
+    protected function validateTimestamp($timestamp)
     {
         // filter_var with this filter return number if is good, and 0 is a good int
         // ... so without '=== false', will get false instead of true for 0

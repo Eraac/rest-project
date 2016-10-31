@@ -83,7 +83,7 @@ abstract class AbstractFilter
 
             if (!$this->isValidOrder($order)) {
                 throw new InvalidFilterException(
-                    $this->t('core.error.invalid_order', ['%order%' => $ordersBy])
+                    $this->t('core.error.invalid_order', ['%order%' => $orderBy])
                 );
             }
 
