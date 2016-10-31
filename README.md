@@ -16,9 +16,7 @@ Bundles
 
 TODO
 =======
-* filter for pagination
-* unit test
-* nelmio doc
 * anti-spam (as bundle)
 * interface for LogRequest
 * LogRequest as a bundle
+
