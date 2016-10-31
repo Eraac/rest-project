@@ -65,6 +65,13 @@ class LogRequest
     private $content;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="response", type="text", nullable=true)
+     */
+    private $response;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="status", type="smallint")
@@ -232,6 +239,26 @@ class LogRequest
     public function getContent()
     {
         return $this->content;
+    }
+
+    /**
+     * @return string
+     */
+    public function getResponse(): string
+    {
+        return $this->response;
+    }
+
+    /**
+     * @param string $response
+     *
+     * @return LogRequest
+     */
+    public function setResponse(string $response)
+    {
+        $this->response = $response;
+
+        return $this;
     }
 
     /**

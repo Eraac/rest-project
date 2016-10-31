@@ -77,8 +77,12 @@ class LogRequestListener
                 ->setStatus($response->getStatusCode())
                 ->setIp($request->getClientIp())
                 ->setUser(!is_string($user) ? $user : null)
-                ->setCreatedAt(new \DateTime()) // necessary because without doctrine set NULL and mysql return an error (field cann't be null)
+                ->setCreatedAt(new \DateTime()) // necessary because without doctrine set NULL and mysql return an error (field can't be null)
             ;
+
+            if ($this->logResponse($response)) {
+                $logRequest->setResponse($response->getContent());
+            }
 
             $this->em->persist($logRequest);
             $this->em->flush();
@@ -137,5 +141,15 @@ class LogRequestListener
         }
 
         return empty($content) ? null : json_encode($content);
+    }
+
+    /**
+     * @param Response $response
+     *
+     * @return bool
+     */
+    private function logResponse(Response $response) : bool
+    {
+        return $response->isClientError() || $response->isServerError();
     }
 }
