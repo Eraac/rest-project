@@ -65,7 +65,7 @@ swiftmailer:
     password:  "%mailer_password%"
     port:      "%mailer_port%"
     encryption: "%mailer_encryption%"
-    sender_address: "%mailer_sender%"
+    sender_address: "%mail_sender%"
     spool:     { type: memory }
 
 fos_user:
@@ -73,7 +73,7 @@ fos_user:
     firewall_name: main
     user_class: UserBundle\Entity\User
     from_email:
-        address:     "%mailer_sender%"
+        address:     "%mail_sender%"
         sender_name: "%app_name%"
     service:
         mailer: user.mailer
@@ -115,7 +115,9 @@ fos_oauth_server:
         user_provider: fos_user.user_provider.username_email
 
 # http://symfony.com/doc/current/bundles/NelmioApiDocBundle/configuration-reference.html
-nelmio_api_doc: ~
+nelmio_api_doc:
+    cache:
+        file: '%kernel.cache_dir%/api-doc-%kernel.environment%.cache'
 
 nelmio_cors:
     defaults:

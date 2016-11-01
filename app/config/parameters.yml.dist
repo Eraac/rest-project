@@ -14,7 +14,8 @@ parameters:
     mailer_password:   ~
     mailer_port: 25
     mailer_encryption: ~
-    mailer_sender:     no-reply@domain.tld
+    mail_sender:       no-reply@domain.tld
+    mail_admin:        contact@domain.tld
 
     # A secret key that's used to generate certain security-related tokens
     secret:            965436407b8b3ac3d595e96d85b5fa06c90973f9
