@@ -1,0 +1,36 @@
+sudo: required
+
+language: php
+php:
+    - 5.6
+
+services:
+  - mysql
+  - docker
+
+install:
+  - sudo rm -Rf /var/lib/apt/lists/*
+  - sudo apt-get update -qq
+  - sudo apt-get install -y mysql-server-5.6 mysql-client-5.6 mysql-client-core-5.6  # hack because the mysql service above never starts :(
+
+before_script:
+  - mv app/config/parameters.yml.travis app/config/parameters.yml
+  - composer install
+
+script:
+  - make test
+
+after_success:
+  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USER" -p="$DOCKER_PASS"
+  - export REPO=$DOCKER_USER/bee-happy
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+  - docker build -f Dockerfile -t $REPO:${TAG} .
+  - docker push $REPO
+
+notifications:
+  email:
+    -  contact@domain.tld
+
+env:
+  global:
+    secure: "xxx"

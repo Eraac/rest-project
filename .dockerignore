@@ -1,0 +1,8 @@
+.git/
+.gitignore
+*.md
+phpunit.xml*
+tests/
+web/app_*
+web/config.php
+app/config/parameters.yml
