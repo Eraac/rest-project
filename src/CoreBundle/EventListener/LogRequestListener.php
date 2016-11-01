@@ -105,17 +105,27 @@ class LogRequestListener
             Request::METHOD_OPTIONS,
         ];
 
+        $route = $request->get('_route') ?? '_';
+
+        return
+            !in_array($request->getMethod(), $notLoggableMethods)
+            && $this->isLoggableRoute($route);
+    }
+
+    /**
+     * @param string $route
+     *
+     * @return bool
+     */
+    public static function isLoggableRoute(string $route) : bool
+    {
         $notLoggableRoutes = [
             'nelmio_api_doc_index',
             'api_get_log_requests',
             'api_get_log_request',
         ];
 
-        $route = $request->get('_route') ?? '_';
-
-        return
-            !in_array($request->getMethod(), $notLoggableMethods)
-            && '_' !== $route[0]
+        return '_' !== $route[0]
             && !in_array($route, $notLoggableRoutes);
     }
 

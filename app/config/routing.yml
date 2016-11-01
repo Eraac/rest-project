@@ -8,6 +8,11 @@ fos_oauth_server_token:
 fos_oauth_server_authorize:
     resource: "@FOSOAuthServerBundle/Resources/config/routing/authorize.xml"
 
+_interface_log_request:
+    path: /_log-requests
+    methods: ['GET']
+    defaults: { _controller: CoreBundle:Default:index }
+
 api:
     type: rest
     resource: "routing_rest.yml"
