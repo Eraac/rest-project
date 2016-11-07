@@ -1,0 +1,21 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: rest-project
+    database_user: root
+    database_password: ~
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    mailer_port: 1025
+    mailer_encryption: null
+    mail_sender: no-reply@symfony.local
+    mail_admin: contact@symfony.local
+    secret: 965436407b8b3ac3d595e96d85b5fa06c90973f9
+    cors_allow_origin: '*'
+    app_name: rest-project
+    base_url_confirmation: 'http://localhost?token='
+    enable_log_request: false
+
