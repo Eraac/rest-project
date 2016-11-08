@@ -37,6 +37,11 @@ class SerializerGroupsManager
 
             $groups = $viewAttribute->getSerializerGroups();
 
+            // if no group in controller and you are an admin, 'Default' group will be not set
+            if (empty($groups)) {
+                $groups[] = "Default";
+            }
+
             $groups[] = $group;
 
             $viewAttribute->setSerializerGroups($groups);
