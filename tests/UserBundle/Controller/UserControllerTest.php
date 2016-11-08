@@ -45,15 +45,26 @@ class UserControllerTest extends AbstractControllerTest
         return $user;
     }
 
+    // === GET ===
+    public function testGetUserSuccessful()
+    {
+        $this->isSuccessful(Request::METHOD_GET, self::PREFIX_URL . '/' . self::USER1['id']);
+    }
+
+    public function testGetUserNotFound()
+    {
+        $this->isNotFound(Request::METHOD_GET, self::PREFIX_URL . '/9876543210');
+    }
+
     // === CGET ===
-    public function testGetUsersSuccessful()
+    public function testCGetUsersSuccessful()
     {
         $header = $this->getHeaderConnect(self::USER1['username'], self::USER1['password']);
 
         $this->isSuccessful(Request::METHOD_GET, self::PREFIX_URL, [], $header);
     }
 
-    public function testGetUsersUnauthorized()
+    public function testCGetUsersUnauthorized()
     {
         $this->isUnauthorized(Request::METHOD_GET, self::PREFIX_URL);
     }

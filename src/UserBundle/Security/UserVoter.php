@@ -33,7 +33,7 @@ class UserVoter extends AbstractVoter
      */
     protected function canView(User $user, TokenInterface $token) : bool
     {
-        return $this->isConnected($token);
+        return true;
     }
 
     /**
