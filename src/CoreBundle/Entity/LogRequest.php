@@ -10,6 +10,7 @@ use UserBundle\Entity\User;
  *
  * @ORM\Table(name="log_request")
  * @ORM\Entity(repositoryClass="CoreBundle\Repository\LogRequestRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class LogRequest
 {
@@ -38,7 +39,7 @@ class LogRequest
      * @var string
      *
      * @ORM\Column(name="method", type="string",
-     *     columnDefinition="ENUM('HEAD', 'GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'PURGE', 'OPTIONS','TRACE', 'CONNECT', 'LINK', 'UNLINK', 'COPY', 'LOCK', 'UNLOCK')"
+     *     columnDefinition="ENUM('HEAD', 'GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'PURGE', 'OPTIONS', 'TRACE', 'CONNECT', 'LINK', 'UNLINK', 'COPY', 'LOCK', 'UNLOCK')"
      * )
      */
     private $method;
@@ -355,5 +356,13 @@ class LogRequest
     public function getIp()
     {
         return $this->ip;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function onPersist()
+    {
+        $this->createdAt = new \DateTime();
     }
 }

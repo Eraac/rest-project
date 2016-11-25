@@ -77,7 +77,6 @@ class LogRequestListener
                 ->setStatus($response->getStatusCode())
                 ->setIp($request->getClientIp())
                 ->setUser(!is_string($user) ? $user : null)
-                ->setCreatedAt(new \DateTime()) // necessary because without doctrine set NULL and mysql return an error (field can't be null)
             ;
 
             if ($this->logResponse($response)) {
