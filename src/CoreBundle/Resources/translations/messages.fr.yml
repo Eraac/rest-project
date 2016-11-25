@@ -1,5 +1,6 @@
 core:
     error:
+        invalid_type_vote: "The type of vote must be a valid type"
         empty_json: "Le JSON ne peut pas être vide"
         invalid_filter: "Le filtre %filter% n'est pas valide"
         invalid_order_by: "Le tri par %order_by% n'est pas valide"
