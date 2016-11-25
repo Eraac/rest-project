@@ -164,4 +164,12 @@ abstract class AbstractControllerTest extends WebTestCase
 
         return ['HTTP_AUTHORIZATION' => 'Bearer ' . $response['access_token']];
     }
+
+    /**
+     * @return array|null
+     */
+    protected function getHeaderAdmin()
+    {
+        return $this->getHeaderConnect(self::ADMIN['username'], self::ADMIN['password']);
+    }
 }
