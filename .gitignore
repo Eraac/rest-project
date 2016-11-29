@@ -8,7 +8,7 @@
 /var/sessions/*
 !var/sessions/.gitkeep
 /app/phpunit.xml
-/bin/
+/bin/*
 !/bin/console
 /vendor/
 /web/bundles/
