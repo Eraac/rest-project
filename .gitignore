@@ -9,6 +9,7 @@
 !var/sessions/.gitkeep
 /app/phpunit.xml
 /bin/
+!/bin/console
 /vendor/
 /web/bundles/
 /web/config.php
