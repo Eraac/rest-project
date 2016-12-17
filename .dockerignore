@@ -10,4 +10,6 @@ Makefile
 .travis.yml
 Dockerfile
 .dockerignore
-
+var/cache/
+var/logs/
+var/SymfonyRequirements.php
