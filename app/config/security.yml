@@ -19,10 +19,12 @@ security:
 
         oauth_token:
             pattern:    ^/oauth/v2/token
+            stateless:  true
             security:   false
 
         oauth_authorize:
             pattern:    ^/oauth/v2/auth
+            stateless:  true
             form_login:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
