@@ -4,7 +4,7 @@ FOS\UserBundle\Model\User:
     properties:
         username:
             expose: true
-            groups: [default, user-list, me]
+            groups: [user-list, me]
         email:
             expose: true
             groups: [me]

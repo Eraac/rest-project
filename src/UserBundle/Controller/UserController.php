@@ -52,7 +52,7 @@ class UserController extends AbstractUserController implements UserDocs
      * @ApiDoc(UserDocs::GET)
      *
      * @FOSRest\Get("/users/{user_id}", requirements={"user_id"="\d+"})
-     * @FOSRest\View(serializerGroups={"default"})
+     * @FOSRest\View()
      *
      * @ParamConverter("u", class="UserBundle:User", options={"id" = "user_id"})
      *
@@ -96,7 +96,7 @@ class UserController extends AbstractUserController implements UserDocs
      * @ApiDoc(UserDocs::PATCH)
      *
      * @FOSRest\Patch("/users/{user_id}", requirements={"user_id"="\d+"})
-     * @FOSRest\View(serializerGroups={"default"})
+     * @FOSRest\View()
      *
      * @ParamConverter("u", class="UserBundle:User", options={"id" = "user_id"})
      *

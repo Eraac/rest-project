@@ -4,19 +4,14 @@ CoreBundle\Entity\LogRequest:
     properties:
         id:
             expose: true
-            groups: [default]
         route:
             expose: true
-            groups: [default]
         method:
             expose: true
-            groups: [default]
         path:
             expose: true
-            groups: [default]
         query:
             expose: true
-            groups: [default]
         content:
             expose: true
             groups: [detail-logrequest]
@@ -25,13 +20,10 @@ CoreBundle\Entity\LogRequest:
             groups: [detail-logrequest]
         status:
             expose: true
-            groups: [default]
         ip:
             expose: true
-            groups: [default]
         createdAt:
             expose: true
-            groups: [default]
 
     relations:
         -
@@ -40,12 +32,7 @@ CoreBundle\Entity\LogRequest:
                 route: api_get_log_request
                 parameters:
                     log_request_id: expr(object.getId())
-            exclusion:
-                groups: [default]
-
         -
             rel: user
             embedded:
                 content: expr(object.getUser())
-            exclusion:
-                groups: [default]

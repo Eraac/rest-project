@@ -26,7 +26,7 @@ class LogRequestController extends AbstractApiController
      * @param Request $request
      *
      * @FOSRest\Get("/log-requests")
-     * @FOSRest\View(serializerGroups={"Default", "default"})
+     * @FOSRest\View()
      *
      * @return PaginatedRepresentation
      */

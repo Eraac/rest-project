@@ -15,7 +15,7 @@ interface MeDocs extends Docs
     const DEFAULT_OUTPUT = [
         'class'     => User::class,
         'parsers'   => self::OUTPUT_PARSER,
-        'groups'    => ['default', 'me'],
+        'groups'    => ['me'],
     ];
 
     const DEFAULT_INPUT  = [
