@@ -8,6 +8,16 @@ use Doctrine\ORM\QueryBuilder;
 abstract class AbstractRepository extends EntityRepository
 {
     /**
+     * @param string $alias
+     *
+     * @return QueryBuilder
+     */
+    public function qbFindAll(string $alias) : QueryBuilder
+    {
+        return $this->createQueryBuilder($alias);
+    }
+
+    /**
      * @param QueryBuilder $qb
      *
      * @return string

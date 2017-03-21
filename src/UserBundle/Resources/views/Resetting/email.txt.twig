@@ -1,3 +1,5 @@
+{% extends 'UserBundle::base_email.html.twig' %}
+
 {% block subject %}
     {% autoescape false %}
         {{ 'resetting.email.subject'|trans({'%username%': user.username}) }}
@@ -6,8 +8,22 @@
 
 {% block body_text %}
     {% autoescape false %}
-        {{ 'resetting.email.message'|trans({'%username%': user.username, '%token%': token}) }}
+        {{ 'resetting.email.message_txt'|trans({'%username%': user.username, '%token%': token}) }}
     {% endautoescape %}
 {% endblock %}
 
-{% block body_html %}{% endblock %}
+{% block preview %}
+    {{ 'resetting.email.message_html.preview'|trans() }}
+{% endblock %}
+
+{% block action %}
+    {{ 'resetting.email.message_html.action'|trans() }}
+{% endblock %}
+
+{% block cta %}
+    {{ 'resetting.email.message_html.cta'|trans({'%reset_url%': reset_url}) }}
+{% endblock %}
+
+{% block failback_cta %}
+    {{ 'resetting.email.message_html.failback_cta'|trans({'%reset_url%': reset_url}) }}
+{% endblock %}

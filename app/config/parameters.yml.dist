@@ -25,5 +25,6 @@ parameters:
 
     app_name: rest-project
     base_url_confirmation: http://localhost?token=
+    base_url_reset_password: http://localhost?token=
 
     enable_log_request: false

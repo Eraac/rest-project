@@ -1,24 +1,40 @@
+base_email_html:
+    hello: "Bonjour %username%,"
+    footer: |
+        <p>Cordialement,</p>
+        <p>L'équipe</p>
+
 registration:
     email:
-        subject: "Bienvenue %username% !"
-        message: |
-            Bonjour %username% !
+        subject: "Bienvenue %username%"
+        message_txt: |
+            Bienvenue %username%,
 
             Pour valider votre compte utilisateur, merci de vous rendre sur %confirmation_url%
 
             Cordialement,
             L'équipe
+        message_html:
+            preview: "Confirmation de votre adresse mail"
+            action: "Merci de valider votre compte."
+            cta: '<a class="cta" href="%confirmation_url%" target="_blank">Valider votre compte</a>'
+            failback_cta: 'Si le bouton ne fonctionne pas, merci de cliquer sur ce lien : <a href="%confirmation_url%">%confirmation_url%</a>'
 
 resetting:
     email:
         subject: "Réinitialisation de votre mot de passe"
-        message: |
-            Bonjour %username% !
+        message_txt: |
+            Bonjour %username%,
 
-            Voici votre code pour réinitialiser votre mot de passe : %token%
+            Voici le lien pour réinitialiser votre mot de passe : %reset_url%
 
             Cordialement,
             L'équipe
+        message_html:
+            preview: "Vous avez demandé une réinitialisation de votre mot de passe"
+            action: "Vous avez demandé une réinitialisation de votre mot de passe, pour continuer merci de cliquer sur le bouton."
+            cta: '<a class="cta" href="%reset_url%" target="_blank">Réinitialiser votre mot de passe</a>'
+            failback_cta: 'Si le bouton ne fonctionne pas, merci de cliquer sur ce lien : <a href="%reset_url%">%reset_url%</a>'
     password_request_expired: "Votre requête a expirée"
 
 confirmation:
@@ -30,3 +46,4 @@ user:
         forget_password:
             wrong_email: "L'email d'utilisateur n'est pas valide"
             not_found: "Le nom d'utilisateur n'existe pas"
+            password_already_requested: "Vous avez déjà demandé un nouveau mot de passe récemment"

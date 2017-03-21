@@ -8,14 +8,6 @@ use Doctrine\ORM\QueryBuilder;
 class UserRepository extends AbstractDateRepository
 {
     /**
-     * @return QueryBuilder
-     */
-    public function qbFindAll() : QueryBuilder
-    {
-        return $this->createQueryBuilder('u');
-    }
-
-    /**
      * @param QueryBuilder $qb
      * @param string|array $username
      *

@@ -36,7 +36,7 @@ class UserController extends AbstractUserController implements UserDocs
      */
     public function cgetAction(Request $request) : PaginatedRepresentation
     {
-        $qb = $this->getDoctrine()->getRepository('UserBundle:User')->qbFindAll();
+        $qb = $this->getDoctrine()->getRepository('UserBundle:User')->qbFindAll('u');
         $qb = $this->applyFilter('user.user_filter', $qb, $request);
 
         return $this->paginate($qb, $request);
@@ -82,7 +82,7 @@ class UserController extends AbstractUserController implements UserDocs
 
         $user = $userManager->createUser();
 
-        return $this->form($request, UserType::class, $user, Request::METHOD_POST);
+        return $this->form($request, UserType::class, $user, ['method' => Request::METHOD_POST]);
     }
 
     /**
@@ -109,7 +109,7 @@ class UserController extends AbstractUserController implements UserDocs
         $formType = $this->isGranted('ROLE_ADMIN') ?
             UserEditAdminType::class : UserEditType::class;
 
-        return $this->form($request, $formType, $u, Request::METHOD_PATCH);
+        return $this->form($request, $formType, $u, ['method' => Request::METHOD_PATCH]);
     }
 
     /**
@@ -184,7 +184,7 @@ class UserController extends AbstractUserController implements UserDocs
         }
 
         if ($user->isPasswordRequestNonExpired($this->getParameter('fos_user.resetting.token_ttl'))) {
-            return new JsonResponse(['error' => $this->t('resetting.password_already_requested', [], 'FOSUserBundle')], JsonResponse::HTTP_BAD_REQUEST);
+            return new JsonResponse(['error' => $this->t('user.error.forget_password..password_already_requested')], JsonResponse::HTTP_BAD_REQUEST);
         }
 
         if (null === $user->getConfirmationToken()) {

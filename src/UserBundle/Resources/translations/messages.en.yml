@@ -1,24 +1,40 @@
+base_email_html:
+    hello: "Hello %username%,"
+    footer: |
+        <p>Regards,</p>
+        <p>Team</p>
+
 registration:
     email:
-        subject: "Welcome %username%!"
-        message: |
-            Hello %username%!
+        subject: "Welcome %username%,"
+        message_txt: |
+            Hello %username%,
 
             To finish activating your account - please visit %confirmation_url%
 
             Regards,
-            the Team.
+            Team
+        message_html:
+            preview: "Confirm your email address"
+            action: "Thank to validate your account."
+            cta: '<a class="cta" href="%confirmation_url%" target="_blank">Validate your account</a>'
+            failback_cta: 'If the button does not work, use this link: <a href="%confirmation_url%">%confirmation_url%</a>'
 
 resetting:
     email:
-        subject: "Reset Password"
-        message: |
-            Hello %username%!
+        subject: "Reset your password"
+        message_txt: |
+            Bonjour %username%,
 
-            To reset your password - please use this code: %token%
+            To reset your password - please use this link: %reset_url%
 
             Regards,
-            the Team.
+            Team
+        message_html:
+            preview: "You have requested for a new password"
+            action: "You have requested for a new password, click on the button for change your password."
+            cta: '<a class="cta" href="%reset_url%" target="_blank">Reset your password</a>'
+            failback_cta: 'If the button does not work, use this link: <a href="%reset_url%">%reset_url%</a>'
     password_request_expired: "Your request has been expired"
 
 confirmation:
@@ -30,3 +46,4 @@ user:
         forget_password:
             wrong_email: 'Email is not valid'
             not_found: "Username does not exist"
+            password_already_requested: "You have already requested a new password recently"

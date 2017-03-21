@@ -1,7 +1,8 @@
 core:
     error:
-        bad_content_type: ""
+        bad_content_type: "The Content-Type isn't correct"
         empty_json: "JSON can't be empty"
+        wrong_key_json: "Keys of the JSON does not matching with the form"
         invalid_filter: "Filter %filter% isn't valid"
         invalid_order_by: "Sort by %order_by% isn't valid"
         invalid_order: "Order %order% isn't valid"

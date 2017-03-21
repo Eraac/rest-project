@@ -1,3 +1,5 @@
+{% extends 'UserBundle::base_email.html.twig' %}
+
 {% block subject %}
     {% autoescape false %}
         {{ 'registration.email.subject'|trans({'%username%': user.username}) }}
@@ -6,8 +8,22 @@
 
 {% block body_text %}
     {% autoescape false %}
-        {{ 'registration.email.message'|trans({'%username%': user.username, '%confirmation_url%': confirmation_url}) }}
+        {{ 'registration.email.message_txt'|trans({'%username%': user.username, '%confirmation_url%': confirmation_url}) }}
     {% endautoescape %}
 {% endblock %}
 
-{% block body_html %}{% endblock %}
+{% block preview %}
+    {{ 'registration.email.message_html.preview'|trans() }}
+{% endblock %}
+
+{% block action %}
+    {{ 'registration.email.message_html.action'|trans() }}
+{% endblock %}
+
+{% block cta %}
+    {{ 'registration.email.message_html.cta'|trans({'%confirmation_url%': confirmation_url}) }}
+{% endblock %}
+
+{% block failback_cta %}
+    {{ 'registration.email.message_html.failback_cta'|trans({'%confirmation_url%': confirmation_url}) }}
+{% endblock %}

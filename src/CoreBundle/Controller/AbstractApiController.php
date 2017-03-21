@@ -16,8 +16,17 @@ use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class AbstractApiController
+ *
+ * @package CoreBundle\Controller
+ */
 class AbstractApiController extends FOSRestController implements ClassResourceInterface
 {
+    const VERSION_1_0 = '1.0';
+
+    const ALL_API_VERSIONS = [self::VERSION_1_0];
+
     /**
      * @return Object|ObjectManager
      */
@@ -30,15 +39,15 @@ class AbstractApiController extends FOSRestController implements ClassResourceIn
      * Handle form
      *
      * @param Request $request
-     * @param string $formType
-     * @param object $entity
-     * @param string $method
+     * @param string  $formType
+     * @param object  $entity
+     * @param array   $options
      *
      * @return object|JsonResponse|Form
      */
-    protected function form(Request $request, $formType, $entity, string $method)
+    protected function form(Request $request, $formType, $entity, array $options)
     {
-        $form = $this->createForm($formType, $entity, ['method' => $method]);
+        $form = $this->createForm($formType, $entity, $options);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -59,14 +68,19 @@ class AbstractApiController extends FOSRestController implements ClassResourceIn
     protected function formError(Request $request, Form $form)
     {
         if (empty(json_decode($request->getContent(), true))) {
-            return new JsonResponse(['errors' => [$this->t('core.error.empty_json')]], JsonResponse::HTTP_BAD_REQUEST);
+            return $this->createJsonError('core.error.empty_json', JsonResponse::HTTP_BAD_REQUEST);
         }
 
         if ('json' !== $request->getContentType()) {
             return $this->createJsonError('core.error.bad_content_type', JsonResponse::HTTP_BAD_REQUEST);
         }
 
-        return $form;
+        // if form has errors
+        if ($form->getErrors(true)->count()) {
+            return $form;
+        }
+
+        return $this->createJsonError('core.error.wrong_key_json', JsonResponse::HTTP_BAD_REQUEST);
     }
 
     /**

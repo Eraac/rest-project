@@ -49,6 +49,7 @@ class Mailer implements MailerInterface
         $context = [
             'user'  => $user,
             'token' => $user->getConfirmationToken(),
+            'reset_url' => $this->parameters['base_url_reset'] . $user->getConfirmationToken(),
         ];
 
         $this->sendMessage($template, $context, $user->getEmail());

@@ -32,7 +32,7 @@ class LogRequestController extends AbstractApiController
      */
     public function cgetAction(Request $request) : PaginatedRepresentation
     {
-        $qb = $this->getDoctrine()->getRepository('CoreBundle:LogRequest')->qbFindAll();
+        $qb = $this->getDoctrine()->getRepository('CoreBundle:LogRequest')->qbFindAll('l');
         $qb = $this->applyFilter('core.log_request_filter', $qb, $request);
 
         return $this->paginate($qb, $request);

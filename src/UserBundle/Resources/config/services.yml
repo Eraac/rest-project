@@ -16,7 +16,7 @@ services:
         arguments:
             - '@mailer'
             - '@twig'
-            - { base_url_confirmation: '%base_url_confirmation%' }
+            - { base_url_confirmation: '%base_url_confirmation%', base_url_reset: '%base_url_reset%' }
 
     user.user_listener:
         class: UserBundle\EventListener\UserListener
